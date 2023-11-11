@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+{% for question_i in question %}
+                        <div class="border-bottom border-dark">
+                            <h4>{{ question_i.title }}</h4>
+                            <p>{{ question_i.text }}</p>
+                            <p>Tag:<a href={{ question_i.tag_path }}>{{ question_i.tag }}</a></p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <img class="rounded-circle mt-1 ms-1" alt="Profile Picture" width="50" height="50" src="https://w.forfun.com/fetch/52/5209a1a5e42d1d84d7f3dc36df66dba5.jpeg">
+                                    <p class = " mt-1 ms-1"><a href = "#" class="page-link">{{ question_i.username }}</a></p>
+                                </div>
+                                <div class="col-4"></div>
+                                <div class="col-2 mt-3">
+                                        <i id="0" onclick ="LikeTest(0);" class="fa fa-thumbs-up mt-5 ms-5">0</i>
+                                        <i onclick="DislikeTest(0);" class="fa fa-thumbs-down"></i>
+                                </div>
+                            </div>
+                        </div>
+{% endfor %}
+
+{% for answer in answers %}
+                        <div class="border border-success mt-3">
+                            <div class="row">
+                                <div class="col-1">
+                                    <img class="rounded-circle mt-1 ms-1" alt="Profile Picture" width="50" height="50" src="https://w.forfun.com/fetch/52/5209a1a5e42d1d84d7f3dc36df66dba5.jpeg">
+                                    <p class = "mt-1 ms-1"><a href = "#" class="page-link">{{ answer.username }}</a></p>
+                                </div>
+                                <div class="col-10 position-relative">
+                                    <p>{{ answer.text }}</p>
+                                    <div class="form-check position-absolute bottom-0 end-0">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          Верный ответ?
+                                        </label>
+                                        <i id="1" onclick ="LikeTest(1);" class="fa fa-thumbs-up ms-2 mt-1">0</i>
+                                        <i onclick="DislikeTest(1);" class="fa fa-thumbs-down"></i>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endfor %}
+
+                        <div class="border-top border-dark mt-5">
+                            <form action="">
+                                <label for="answer" class="mt-3">Ответ</label>
+                                <textarea type="text" class="form-control" style="height: 20%;" id="question" placeholder="answer"></textarea>
+                                <button type="submit" class="btn btn-primary mt-4">Ответить</button>
+                            </form>
+                        </div>
+
+{% endblock %}

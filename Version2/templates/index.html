@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+{% for question in questions %}
+
+                        <div class="border border-primary mt-2">
+                            <div class="row">
+                            <div class="col-4">
+                                <img class="rounded-circle mt-1 ms-1" alt="Profile Picture" width="50" height="50" src="https://w.forfun.com/fetch/52/5209a1a5e42d1d84d7f3dc36df66dba5.jpeg">
+                                <h3 class="mt-1 ms-1"><a href ="#" class="page-link">Alexey</a></h3>
+                            </div>
+                            <div class="col-5">
+                                <p class="mx-auto mt-3">{{ question.id }}</p>
+                                <p class="mx-auto mt-3"><a href={{ question.path }}>{{ question.title }}</a></p>
+                                <p>Tag: <a href={{ question.tag_path }}>{{ question.tag }}</a></p>
+                            </div>
+                            <div class="col-3">
+                                <i id="1" onclick ="LikeTest(1);" class="fa fa-thumbs-up ms-5 mt-1">0</i>
+                                <i onclick="DislikeTest(1);" class="fa fa-thumbs-down"></i>
+                                <p class="mt-5 ms-5"><a href={{ question.path }}>3 ответа</a></p>
+                            </div>
+                            </div>
+                        </div>
+{% endfor %}
+{% endblock %}
