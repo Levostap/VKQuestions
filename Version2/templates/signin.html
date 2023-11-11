@@ -1,45 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../static/anq.css">
-    </head>
-    <body>
-        <div>
-        <nav class="navbar navbar-expand-lg" id="navigate_pan">
-            
-            <div id="logo">
-                <h2><a href="index.html">Лого</a></h2>
-            </div> 
-            <div id="quest">
-                <h5><a href="questions.html" class="nav-link active" aria-current="page">Вопросы</a></h5>
-            </div>
-            <div id="ask" class="ms-4">
-                <h5><a href="ask.html" class="nav-link active" aria-current="page">Задать вопрос</a></h5>
-            </div>
-            <div>
-            </div>
-            <div id="searcher">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Как научиться летать?" aria-label="Поиск">
-                    <button class="btn btn-outline-success" type="submit">Найти</button>
-                  </form>
-            </div>
-            <div class="ms-4">
-                <h5><a href="../static/signup.html" class="nav-link active" aria-current="page">Регистрация</a></h5>
-            </div>
-            <div class="ms-4">
-                <h5><a href="../static/signin.html" class="nav-link active" aria-current="page">Войти</a></h5>
-            </div>
-        </nav>
-        </div>
-        <main class="flex-shrink-0">
-            <div class = "container">
-                <div class = "row">
-                    <div class="col-8">
+{% extends 'layouts/base.html' %}
+
+{% block content %}
                         <div class="" >
                             <form>
                                 <div class = "form-group">
@@ -52,30 +13,6 @@
                                 <button type="submit" class="btn btn-primary mt-2">Войти</button>
                             </form>
                             </div>
-                    </div>
-                    <div class="col-4">
-                        <h2>Популярные теги</h2>
-                        <ul class="list-group">
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Авто</a></li>
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Арктика</a></li>
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Аристотель</a></li>
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Автократия</a></li>
-                          </ul>
-                          <h2 class=" mt-5">Популярные пользователи</h2>
-                          <ul class = "list-group">
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Чел1</a></li>
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Чел2</a></li>
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Чел3</a></li>
-                            <li class="list-group-item nav-item"><a href="#" class="nav-link active" aria-current="page">Чел4</a></li>
-                        </ul>
-                        </div>
-                </div>
-            </div>
-        </main>
-        <footer class="ms-5 mt-5">
-            <p>Copyright © <time datetime="1998">1998</time></p>
-            <address>Sahalin</address>
-        </footer>
 
-    </body>
-</html>
+{% endblock %}
+
