@@ -77,9 +77,28 @@ def tag(request, tn):
     ]
     return render(request, 'index.html', {'questions': questions})
 
+def paginate(request, objects_list, default_limit=10, pages_count=None):
+    try:
+        limit = int(request.GET.get('limit', default_limit))
+    except ValueError:
+        limit = default_limit
+    if limit > 100:
+        limit = default_limit
+    try:
+        page = int(request.GET.get('page', 1))
+    except ValueError:
+        raise Http404
 
-def paginator(questions, page, per_page = 10): #questions - общее количество элементов, page - номер отображаемой страницы, per_page - сколько элементов на странице должно быть
-    pag_questions = []
-    for i in range(page * per_page, page * per_page + per_page):
-        pag_questions.append(questions[i])
-    return pag_questions
+    paginator = Paginator(objects_list, limit)
+    try:
+        page = paginator.page(page)
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+    if not pages_count:
+        page_range = paginator.page_range
+    else:
+        start = page.number - pages_count
+        if start < 0:
+            start = 0
+        page_range = paginator.page_range[start: page.number + int(pages_count / 2)]
+    return page, page_range

@@ -1,0 +1,52 @@
+{% extends "questions/base.html" %}
+{% block title %}{{ question.title }}{% endblock %}
+{% block header %}{{ question.title }}{% endblock %}
+{% block content %}
+    <table class="w-100"><tr>
+        <td class="pr-2 text-center" style="width: 160px;">
+            <img class="avatar-lg" src="{{ question.user.avatar.url }}">
+            {% include 'questions/includes/rating_form.html' with rating=question.rating action='#' %}
+        </td>
+        <td>
+            <p class="card-text">{{ question.text }}</p>
+            <p>{% include 'questions/includes/tags_list.html' %}</p>
+        </td>
+    </tr></table>
+    <hr>
+
+    {% if answers|length > 0 %}
+        {% for answer in answers %}
+            <div class="card my-2">
+                <div class="card-block">
+                    <table class="w-100"><tr>
+                        <td class="pr-2 text-center" style="width: 100px;">
+                            <a href="#"><img class="avatar-md" src="{{ answer.user.avatar.url }}"></a>
+                            {% include 'questions/includes/rating_form.html' with rating=answer.rating action='#' %}
+                        </td>
+                        <td class="pl-2">
+                            <p class="card-text">{{ answer.text }}</p>
+                            <form>
+                                <div class="form-group has-success">
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Верно!</span>
+                                    </label>
+                                </div>
+                            </form>
+                        </td>
+                    </tr></table>
+                </div>
+            </div>
+        {% endfor %}
+        {% include 'questions/includes/paginator.html' %}
+        <hr>
+    {% endif %}
+
+    <form>
+        <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="Напишите Ваш ответ здесь..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Ответить</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "questions/base.html" %}
+{% block title %}Топ вопросов{% endblock %}
+{% block header %}
+    Топ вопросов
+    <a href="{% url 'index' %}" class="btn btn-link">Новые вопросы</a>
+{% endblock %}
+{% block content %}
+    {% include 'questions/includes/questions_list.html' %}
+    {% include 'questions/includes/paginator.html' %}
+{% endblock %}

@@ -1,0 +1,22 @@
+.main-container {
+    margin-top: 65px;
+}
+
+.avatar-sm {
+    width: 40px;
+    height: 40px;
+}
+
+.avatar-md {
+    width: 84px;
+    height: 84px;
+}
+
+.avatar-lg {
+    width: 140px;
+    height: 140px;
+}
+
+.rating-input {
+    width: 44px !important;
+}

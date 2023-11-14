@@ -1,0 +1,9 @@
+{% extends "questions/base.html" %}
+{% block title %}Вопросов по тэгу "{{ tag.name }}"{% endblock %}
+{% block header %}
+    Вопросов по тэгу "{{ tag.name }}"
+{% endblock %}
+{% block content %}
+    {% include 'questions/includes/questions_list.html' %}
+    {% include 'questions/includes/paginator.html' %}
+{% endblock %}
