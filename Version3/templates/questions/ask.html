@@ -2,24 +2,11 @@
 {% load static %}
 {% block title %}Задать вопрос{% endblock %}
 {% block header %}Задать вопрос{% endblock %}
+{% block title %}Задать вопрос{% endblock %}
+{% block header %}Задать вопрос{% endblock %}
 {% block content %}
-    <div class="alert alert-danger" role="alert">
-         Опа... Ошибочка...
-    </div>
-
-    <form>
-        <div class="form-group">
-            <label>Заголовок вопроса</label>
-            <input type="text" class="form-control" maxlength="100" placeholder="Введите заголовок вопроса">
-        </div>
-        <div class="form-group mt-2">
-            <label>Текст вопроса</label>
-            <textarea class="form-control" rows="4"></textarea>
-        </div>
-        <div class="form-group mt-2">
-            <label>Теги</label>
-            <input type="text" class="form-control" placeholder="Теги к вопросу" maxlength="50">
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Задать вопрос</button>
+    <form action="{% url 'ask' %}" method="POST">
+        {% include 'questions/includes/form.html' %}
+        <button type="submit" class="btn btn-primary">Задать вопрос</button>
     </form>
 {% endblock %}

@@ -35,8 +35,10 @@
                     <button class="btn btn-outline-success" type="submit">Найти</button>
                   </form>
             </div>
-            <div id="drop_avatar" class="nav-item dropdown">
-                <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                {% if user.is_authenticated %}
+                    <div id="drop_avatar" class="nav-item dropdown">
+                        <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="rounded-circle" alt="Profile Picture" width="65" height="50" src="https://get.wallhere.com/photo/face-illustration-women-blonde-long-hair-choker-anime-anime-girls-blue-eyes-white-background-necklace-black-hair-Vocaloid-hair-mouth-nose-sad-IA-Vocaloid-head-Iris-girl-smile-eye-blond-hairstyle-1920x1080-px-computer-wallpaper-brown-hair-human-hair-color-facial-expression-ear-vision-care-fictional-character-organ-mangaka-eyelash-forehead-hime-cut-cg-artwork-798330.jpg">
                 </div>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,13 +47,18 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Log out</a></li>
                   </ul>
-            </div>
-            <div class="ms-4">
+                        </div>
+                {% else %}
+                    <div class="ms-4">
                 <h5><a href="/signup" class="nav-link active" aria-current="page">Регистрация</a></h5>
             </div>
             <div class="ms-4">
                 <h5><a href="/login" class="nav-link active" aria-current="page">Войти</a></h5>
             </div>
+                {% endif %}
+
+
+
         </nav>
         </div>
 

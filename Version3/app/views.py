@@ -1,5 +1,11 @@
+import re
+
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, get_object_or_404
-from django.http import HttpResponseBadRequest, HttpResponseNotFound, Http404
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, Http404, HttpResponseRedirect
+
+from app.forms import LoginForm, AskForm, UserSettingsForm, SignUpForm
 from app.models import Profile, Question, Tag
 from django.core.paginator import Paginator, EmptyPage
 from django.core.exceptions import ObjectDoesNotExist
@@ -65,8 +71,18 @@ def tag(request, tag_name=None):
     })
 
 # Форма создания вопроса (URL = /ask/)
+@login_required
 def ask(request):
-    return render(request, 'questions/ask.html', {})
+    if request.method == "POST":
+        form = AskForm(request.user, request.POST)
+        if form.is_valid():
+            question = form.save()
+            return HttpResponseRedirect('/question/' + str(question.pk))
+    else:
+        form = AskForm(request.user)
+    return render(request, 'questions/ask.html', {
+        'form': form,
+    })
 
 # Cтраница одного вопроса со списком ответов (URL = /question/35/)
 def question(request, question_id=None):
@@ -80,13 +96,64 @@ def question(request, question_id=None):
         'page_range': page_range,
     })
 
+
+def get_continue(request, default='/'):
+    url = request.GET.get('continue', default)
+    if re.match(r'^/|http://127\.0\.0\.', url):   # Защита от Open Redirect
+        return url
+    return default
+
 # Форма логина (URL = /login/)
 def login(request):
-    return render(request, 'questions/login.html', {})
+    url = get_continue(request)
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            auth.login(request, form.auth())
+            return HttpResponseRedirect(url)
+    else:
+        form = LoginForm()
+    return render(request, 'questions/login.html', {
+        'form': form,
+        'continue_url': url,
+    })
 
-# Форма регистрации (URL = /signup/)
 def signup(request):
-    return render(request, 'questions/signup.html', {})
+    url = get_continue(request)
+    if request.method == "POST":
+        form = SignUpForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/login?continue=' + url)
+    else:
+        form = SignUpForm()
+    return render(request, 'questions/signup.html', {
+        'form': form,
+        'continue_url': url
+    })
+
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(get_continue(request))
+
+
+@login_required
+def settings(request):
+    user = request.user
+    if request.method == "POST":
+        form = UserSettingsForm(user, request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/settings')
+    else:
+        form = UserSettingsForm(user, initial={'email': user.email,
+                                               'nick_name': user.profile.nick_name,
+                                               'avatar': user.profile.avatar})
+    return render(request, 'questions/settings.html', {
+        'form': form,
+    })
+
 
 def hello_world(request):
     return render(request, 'questions/hello_world.html', {

@@ -1,6 +1,6 @@
 {% if question.tags.count > 0 %}
     Теги:
     {% for tag in question.tags.all %}
-        <a href=""><span class="">{{ tag.name }}</span></a>
+        <a href="/tag/{{ tag.name }}"><span class="">{{ tag.name }}</span></a>
     {% endfor %}
 {% endif %}
